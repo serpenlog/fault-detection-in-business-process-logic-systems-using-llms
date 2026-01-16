@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             id="OrderManagementProcess" targetNamespace="http://bpmn.io/schema/bpmn">
+
+  <!-- Process Definition -->
+  <process id="orderManagementProcess" name="Order Management Process" isExecutable="true">
+
+    <!-- Start Event: Order Placement -->
+    <startEvent id="startOrderPlacement" name="Order Placement">
+      <outgoing>flow1</outgoing>
+    </startEvent>
+
+    <!-- Task: Check Stock Availability -->
+    <task id="checkStockTask" name="Check Stock Availability">
+      <incoming>flow1</incoming>
+      <outgoing>flow2</outgoing>
+    </task>
+
+    <!-- Exclusive Gateway: Stock Available? -->
+    <exclusiveGateway id="stockAvailableGateway" name="Is Stock Available?">
+      <incoming>flow2</incoming>
+      <outgoing>flow3</outgoing>
+      <outgoing>flow4</outgoing>
+    </exclusiveGateway>
+
+    <!-- Task: Confirm Order -->
+    <task id="confirmOrderTask" name="Confirm Order">
+      <incoming>flow3</incoming>
+      <outgoing>flow5</outgoing>
+    </task>
+
+    <!-- Task: Restock Request -->
+    <task id="restockRequestTask" name="Generate Restock Request">
+      <incoming>flow4</incoming>
+      <outgoing>flow6</outgoing>
+    </task>
+
+    <!-- Task: Notify Customer of Delay -->
+    <task id="notifyDelayTask" name="Notify Customer of Delay">
+      <incoming>flow6</incoming>
+      <outgoing>flow7</outgoing>
+    </task>
+
+    <!-- Exclusive Gateway: Cancel or Wait? -->
+    <exclusiveGateway id="cancelOrWaitGateway" name="Cancel or Wait?">
+      <incoming>flow7</incoming>
+      <outgoing>flow8</outgoing>
+      <outgoing>flow9</outgoing>
+    </exclusiveGateway>
+
+    <!-- Task: Cancel Order -->
+    <task id="cancelOrderTask" name="Cancel Order">
+      <incoming>flow8</incoming>
+      <outgoing>flow10</outgoing>
+    </task>
+
+    <!-- Task: Proceed with Payment -->
+    <task id="proceedWithPaymentTask" name="Proceed with Payment">
+      <incoming>flow5</incoming>
+      <incoming>flow9</incoming>
+      <outgoing>flow11</outgoing>
+    </task>
+
+    <!-- Task: Process Payment -->
+    <task id="processPaymentTask" name="Process Payment">
+      <incoming>flow11</incoming>
+      <outgoing>flow12</outgoing>
+    </task>
+
+    <!-- Task: Forward to Warehouse -->
+    <task id="forwardToWarehouseTask" name="Forward to Warehouse for Fulfillment">
+      <incoming>flow12</incoming>
+      <outgoing>flow13</outgoing>
+    </task>
+
+    <!-- Task: Prepare Shipment -->
+    <task id="prepareShipmentTask" name="Prepare Shipment">
+      <incoming>flow13</incoming>
+      <outgoing>flow14</outgoing>
+    </task>
+
+    <!-- Task: Confirm Shipping -->
+    <task id="confirmShippingTask" name="Confirm Shipping and Send Tracking Details">
+      <incoming>flow14</incoming>
+      <outgoing>flow15</outgoing>
+    </task>
+
+    <!-- End Event: Order Closure -->
+    <endEvent id="endOrderClosure" name="Order Closure">
+      <incoming>flow15</incoming>
+    </endEvent>
+
+    <!-- Sequence Flows -->
+    <sequenceFlow id="flow1" sourceRef="startOrderPlacement" targetRef="checkStockTask"/>
+    <sequenceFlow id="flow2" sourceRef="checkStockTask" targetRef="stockAvailableGateway"/>
+    <sequenceFlow id="flow3" sourceRef="stockAvailableGateway" targetRef="confirmOrderTask"/>
+    <sequenceFlow id="flow4" sourceRef="stockAvailableGateway" targetRef="restockRequestTask"/>
+    <sequenceFlow id="flow5" sourceRef="confirmOrderTask" targetRef="proceedWithPaymentTask"/>
+    <sequenceFlow id="flow6" sourceRef="restockRequestTask" targetRef="notifyDelayTask"/>
+    <sequenceFlow id="flow7" sourceRef="notifyDelayTask" targetRef="cancelOrWaitGateway"/>
+    <sequenceFlow id="flow8" sourceRef="cancelOrWaitGateway" targetRef="cancelOrderTask"/>
+    <sequenceFlow id="flow9" sourceRef="cancelOrWaitGateway" targetRef="proceedWithPaymentTask"/>
+    <sequenceFlow id="flow10" sourceRef="cancelOrderTask" targetRef="endOrderClosure"/>
+    <sequenceFlow id="flow11" sourceRef="proceedWithPaymentTask" targetRef="processPaymentTask"/>
+    <sequenceFlow id="flow12" sourceRef="processPaymentTask" targetRef="forwardToWarehouseTask"/>
+    <sequenceFlow id="flow13" sourceRef="forwardToWarehouseTask" targetRef="prepareShipmentTask"/>
+    <sequenceFlow id="flow14" sourceRef="prepareShipmentTask" targetRef="confirmShippingTask"/>
+    <sequenceFlow id="flow15" sourceRef="confirmShippingTask" targetRef="endOrderClosure"/>
+
+  </process>
+
+  <!-- BPMN Diagram -->
+  <bpmndi:BPMNDiagram id="OrderManagementProcessDiagram">
+    <bpmndi:BPMNPlane bpmnElement="orderManagementProcess">
+      <!-- Elements for Diagram -->
+      <!-- Add graphic details like BPMN shapes and edges here if needed -->
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  
+</definitions>

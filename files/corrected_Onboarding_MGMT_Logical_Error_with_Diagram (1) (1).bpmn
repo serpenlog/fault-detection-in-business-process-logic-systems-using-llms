@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.1.1">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:sequenceFlow id="Flow_1" targetRef="Activity_1" />
+    <bpmn:userTask id="Activity_1" name="Background Check">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_1" />
+    <bpmn:sequenceFlow id="Flow_3" targetRef="Activity_2" />
+    <bpmn:userTask id="Activity_2" name="Document Submission">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Activity_2" />
+    <bpmn:sequenceFlow id="Flow_6" targetRef="Activity_3" />
+    <bpmn:userTask id="Activity_3" name="IT Setup">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="Activity_3" targetRef="Activity_4" />
+    <bpmn:userTask id="Activity_4" name="Orientation">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+      <bpmn:outgoing>Flow_9</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_9" sourceRef="Activity_4" />
+    <bpmn:sequenceFlow id="Flow_7" targetRef="Activity_1" />
+    <bpmn:sequenceFlow id="Flow_4" targetRef="EndEvent_2" />
+    <bpmn:task id="StartEvent_Error3" name="Incorrect Start" />
+    <bpmn:task id="Task_EndMismatch" name="Task Leading to Incorrect End" />
+    <bpmn:task id="EndEvent_Error3" name="Mismatched End" />
+    <bpmn:task id="StartEvent_LinkCorrection" name="Start with Link Correction" />
+    <bpmn:task id="Task_LinkFix" name="Correct Mislinked Task" />
+    <bpmn:task id="EndEvent_LinkCorrected" name="Resolved Link End" />
+    <bpmn:task id="StartEvent_LogicalError" name="Logical Error Start" />
+    <bpmn:task id="Task_LogicalIssue" name="Task with Logical Issue" />
+    <bpmn:task id="EndEvent_LogicalError" name="End of Logical Error" />
+    <bpmn:task id="StartEvent_2" name="Task Error Start" />
+    <bpmn:task id="EndEvent_2" name="End of Task Error" />
+    <bpmn:task id="Task_Misconfigured" name="Misconfigured Task" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="Activity_1_di" bpmnElement="Activity_1">
+        <dc:Bounds x="160" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_2_di" bpmnElement="Activity_2">
+        <dc:Bounds x="460" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_3_di" bpmnElement="Activity_3">
+        <dc:Bounds x="760" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_4_di" bpmnElement="Activity_4">
+        <dc:Bounds x="910" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_2_di" bpmnElement="EndEvent_2">
+        <dc:Bounds x="310" y="250" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="860" y="118" />
+        <di:waypoint x="910" y="118" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

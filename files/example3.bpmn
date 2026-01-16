@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             id="Definitions_1"
+             targetNamespace="http://bpmn.org/schema/bpmn">
+    <process id="EmployeeOnboardingProcess" isExecutable="false">
+        <startEvent id="StartEvent_Onboarding" name="Initiation of Onboarding">
+            <outgoing>Flow_InitToWorkspacePrep</outgoing>
+        </startEvent>
+        <task id="Task_WorkspacePreparation" name="Preparation of Workspace and Tools">
+            <incoming>Flow_InitToWorkspacePrep</incoming>
+            <outgoing>Flow_WorkspacePrepToWelcomePackage</outgoing>
+        </task>
+        <task id="Task_WelcomePackage" name="Welcome Package Creation">
+            <incoming>Flow_WorkspacePrepToWelcomePackage</incoming>
+            <outgoing>Flow_WelcomePackageToFirstDay</outgoing>
+        </task>
+        <task id="Task_FirstDayActivities" name="First Day Activities">
+            <incoming>Flow_WelcomePackageToFirstDay</incoming>
+            <outgoing>Flow_FirstDayToTraining</outgoing>
+        </task>
+        <task id="Task_Training" name="Training and Development">
+            <incoming>Flow_FirstDayToTraining</incoming>
+            <outgoing>Flow_TrainingToProbation</outgoing>
+        </task>
+        <task id="Task_ProbationPeriod" name="Probation Period Evaluation">
+            <incoming>Flow_TrainingToProbation</incoming>
+            <outgoing>Flow_ProbationToCompletion</outgoing>
+        </task>
+        <endEvent id="EndEvent_Completion" name="Completion of Onboarding">
+            <incoming>Flow_ProbationToCompletion</incoming>
+        </endEvent>
+        <sequenceFlow id="Flow_InitToWorkspacePrep" sourceRef="StartEvent_Onboarding" targetRef="Task_WorkspacePreparation"/>
+        <sequenceFlow id="Flow_WorkspacePrepToWelcomePackage" sourceRef="Task_WorkspacePreparation" targetRef="Task_WelcomePackage"/>
+        <sequenceFlow id="Flow_WelcomePackageToFirstDay" sourceRef="Task_WelcomePackage" targetRef="Task_FirstDayActivities"/>
+        <sequenceFlow id="Flow_FirstDayToTraining" sourceRef="Task_FirstDayActivities" targetRef="Task_Training"/>
+        <sequenceFlow id="Flow_TrainingToProbation" sourceRef="Task_Training" targetRef="Task_ProbationPeriod"/>
+        <sequenceFlow id="Flow_ProbationToCompletion" sourceRef="Task_ProbationPeriod" targetRef="EndEvent_Completion"/>
+    </process>
+    <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+        <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="EmployeeOnboardingProcess">
+            <bpmndi:BPMNShape id="BPMNShape_StartEvent_Onboarding" bpmnElement="StartEvent_Onboarding">
+                <dc:Bounds x="100" y="100" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_Task_WorkspacePreparation" bpmnElement="Task_WorkspacePreparation">
+                <dc:Bounds x="200" y="80" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_Task_WelcomePackage" bpmnElement="Task_WelcomePackage">
+                <dc:Bounds x="350" y="80" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_Task_FirstDayActivities" bpmnElement="Task_FirstDayActivities">
+                <dc:Bounds x="500" y="80" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_Task_Training" bpmnElement="Task_Training">
+                <dc:Bounds x="650" y="80" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_Task_ProbationPeriod" bpmnElement="Task_ProbationPeriod">
+                <dc:Bounds x="800" y="80" width="100" height="80"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape id="BPMNShape_EndEvent_Completion" bpmnElement="EndEvent_Completion">
+                <dc:Bounds x="950" y="100" width="36" height="36"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge id="BPMNEdge_Flow_InitToWorkspacePrep" bpmnElement="Flow_InitToWorkspacePrep">
+                <di:waypoint x="136" y="118"/>
+                <di:waypoint x="200" y="118"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_Flow_WorkspacePrepToWelcomePackage" bpmnElement="Flow_WorkspacePrepToWelcomePackage">
+                <di:waypoint x="300" y="118"/>
+                <di:waypoint x="350" y="118"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_Flow_WelcomePackageToFirstDay" bpmnElement="Flow_WelcomePackageToFirstDay">
+                <di:waypoint x="450" y="118"/>
+                <di:waypoint x="500" y="118"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_Flow_FirstDayToTraining" bpmnElement="Flow_FirstDayToTraining">
+                <di:waypoint x="600" y="118"/>
+                <di:waypoint x="650" y="118"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_Flow_TrainingToProbation" bpmnElement="Flow_TrainingToProbation">
+                <di:waypoint x="750" y="118"/>
+                <di:waypoint x="800" y="118"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge id="BPMNEdge_Flow_ProbationToCompletion" bpmnElement="Flow_ProbationToCompletion">
+                <di:waypoint x="900" y="118"/>
+                <di:waypoint x="950" y="118"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</definitions>

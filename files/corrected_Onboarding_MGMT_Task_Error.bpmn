@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.2.0">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_1"/>
+    <bpmn:userTask id="Activity_1" name="Missing Task Label">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="Activity_1" targetRef="Gateway_1"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="Gateway_1" targetRef="Event_1"/>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="Gateway_1" targetRef="Activity_2"/>
+    <bpmn:userTask id="Activity_2" name="IT Setup">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="Activity_2" targetRef="Event_2"/>
+    <bpmn:task id="StartEvent_Error3" name="Incorrect Start"/><bpmn:task id="Task_EndMismatch" name="Task Leading to Incorrect End"/><bpmn:task id="EndEvent_Error3" name="Mismatched End"/><bpmn:task id="StartEvent_LinkCorrection" name="Start with Link Correction"/><bpmn:task id="Task_LinkFix" name="Correct Mislinked Task"/><bpmn:task id="EndEvent_LinkCorrected" name="Resolved Link End"/><bpmn:task id="StartEvent_LogicalError" name="Logical Error Start"/><bpmn:task id="Task_LogicalIssue" name="Task with Logical Issue"/><bpmn:task id="EndEvent_LogicalError" name="End of Logical Error"/><bpmn:task id="StartEvent_2" name="Task Error Start"/><bpmn:task id="EndEvent_2" name="End of Task Error"/><bpmn:task id="Task_Misconfigured" name="Misconfigured Task"/></bpmn:process>
+</bpmn:definitions>

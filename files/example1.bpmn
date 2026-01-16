@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             id="Definition"
+             targetNamespace="http://www.example.org/bpmn20">
+
+    <process id="customerSupportProcess" name="Customer Support Process" isExecutable="false">
+        <!-- Start Event -->
+        <startEvent id="startEvent" name="Receive Ticket">
+            <outgoing>Flow_1</outgoing>
+        </startEvent>
+
+        <!-- Tasks -->
+        <task id="reviewTicket" name="Review Ticket">
+            <incoming>Flow_1</incoming>
+            <outgoing>Flow_2</outgoing>
+        </task>
+        
+        <task id="immediateEscalation" name="Immediate Escalation">
+            <incoming>Flow_3</incoming>
+            <outgoing>Flow_4</outgoing>
+        </task>
+        
+        <task id="resolveHighPriorityIssue" name="Resolve High Priority Issue">
+            <incoming>Flow_4</incoming>
+            <outgoing>Flow_5</outgoing>
+        </task>
+        
+        <task id="assignToSupportAgent" name="Assign to Support Agent">
+            <incoming>Flow_6</incoming>
+            <outgoing>Flow_7</outgoing>
+        </task>
+        
+        <task id="resolveMediumPriorityIssue" name="Resolve Medium Priority Issue">
+            <incoming>Flow_7</incoming>
+            <outgoing>Flow_8</outgoing>
+        </task>
+        
+        <task id="addToQueue" name="Add to Queue">
+            <incoming>Flow_9</incoming>
+            <outgoing>Flow_10</outgoing>
+        </task>
+        
+        <task id="resolveLowPriorityIssue" name="Resolve Low Priority Issue">
+            <incoming>Flow_10</incoming>
+            <outgoing>Flow_11</outgoing>
+        </task>
+        
+        <task id="verifyResolution" name="Verify Resolution">
+            <incoming>Flow_5</incoming>
+            <incoming>Flow_8</incoming>
+            <incoming>Flow_11</incoming>
+            <outgoing>Flow_12</outgoing>
+        </task>
+        
+        <task id="informCustomer" name="Inform Customer">
+            <incoming>Flow_12</incoming>
+            <outgoing>Flow_13</outgoing>
+        </task>
+        
+        <task id="closeTicket" name="Close Ticket">
+            <incoming>Flow_13</incoming>
+            <outgoing>Flow_14</outgoing>
+        </task>
+
+        <!-- End Event -->
+        <endEvent id="endEvent" name="Ticket Resolved">
+            <incoming>Flow_14</incoming>
+        </endEvent>
+
+        <!-- Sequence Flows -->
+        <sequenceFlow id="Flow_1" sourceRef="startEvent" targetRef="reviewTicket"/>
+        <sequenceFlow id="Flow_2" sourceRef="reviewTicket" targetRef="determinePriority"/>
+        <sequenceFlow id="Flow_3" sourceRef="highPriority" targetRef="immediateEscalation"/>
+        <sequenceFlow id="Flow_4" sourceRef="immediateEscalation" targetRef="resolveHighPriorityIssue"/>
+        <sequenceFlow id="Flow_5" sourceRef="resolveHighPriorityIssue" targetRef="verifyResolution"/>
+        <sequenceFlow id="Flow_6" sourceRef="mediumPriority" targetRef="assignToSupportAgent"/>
+        <sequenceFlow id="Flow_7" sourceRef="assignToSupportAgent" targetRef="resolveMediumPriorityIssue"/>
+        <sequenceFlow id="Flow_8" sourceRef="resolveMediumPriorityIssue" targetRef="verifyResolution"/>
+        <sequenceFlow id="Flow_9" sourceRef="lowPriority" targetRef="addToQueue"/>
+        <sequenceFlow id="Flow_10" sourceRef="addToQueue" targetRef="resolveLowPriorityIssue"/>
+        <sequenceFlow id="Flow_11" sourceRef="resolveLowPriorityIssue" targetRef="verifyResolution"/>
+        <sequenceFlow id="Flow_12" sourceRef="verifyResolution" targetRef="informCustomer"/>
+        <sequenceFlow id="Flow_13" sourceRef="informCustomer" targetRef="closeTicket"/>
+        <sequenceFlow id="Flow_14" sourceRef="closeTicket" targetRef="endEvent"/>
+
+        <!-- Gateways -->
+        <exclusiveGateway id="determinePriority" name="Determine Priority" default="mediumPriority">
+            <incoming>Flow_2</incoming>
+            <outgoing>Flow_3</outgoing>
+            <outgoing>Flow_6</outgoing>
+            <outgoing>Flow_9</outgoing>
+        </exclusiveGateway>
+
+        <!-- Conditions for the Exclusive Gateway -->
+        <conditionExpression xsi:type="tFormalExpression" id="highPriority" language="http://www.w3.org/1999/XPath">
+            <![CDATA[
+                ${ticketPriority == 'high'}
+            ]]>
+        </conditionExpression>
+        <conditionExpression xsi:type="tFormalExpression" id="mediumPriority" language="http://www.w3.org/1999/XPath">
+            <![CDATA[
+                ${ticketPriority == 'medium'}
+            ]]>
+        </conditionExpression>
+        <conditionExpression xsi:type="tFormalExpression" id="lowPriority" language="http://www.w3.org/1999/XPath">
+            <![CDATA[
+                ${ticketPriority == 'low'}
+            ]]>
+        </conditionExpression>
+    </process>
+
+    <!-- BPMNDI (BPMN Diagram Interchange) information can be added here to define the visual representation of the BPMN elements -->
+    <!-- bpmndi:BPMNDiagram -->
+    <!-- bpmndi:BPMNPlane -->
+    <!-- bpmndi:BPMNShape -->
+    <!-- bpmndi:BPMNEdge -->
+
+</definitions>

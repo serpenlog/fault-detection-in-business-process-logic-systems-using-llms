@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:definitions xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns1="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns2="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns3="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <ns0:process id="Process_1" isExecutable="false">
+    <ns0:startEvent id="StartEvent_1" name="Inventory Monitoring">
+      <ns0:outgoing>Flow_1</ns0:outgoing>
+    </ns0:startEvent>
+    
+    <ns0:task id="Activity_1" name="Demand Forecasting">
+      <ns0:incoming>Flow_1</ns0:incoming>
+      <ns0:outgoing>Flow_2</ns0:outgoing>
+    </ns0:task>
+    
+    <ns0:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_1" />
+    <ns0:sequenceFlow id="Flow_2" sourceRef="Activity_1" targetRef="ExclusiveGateway_1" />
+    
+    
+    <ns0:exclusiveGateway id="ExclusiveGateway_1" name="Demand Increase?">
+      <ns0:incoming>Flow_2</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_3</ns0:outgoing>
+      <ns0:outgoing>SequenceFlow_4</ns0:outgoing>
+    </ns0:exclusiveGateway>
+    
+    <ns0:sequenceFlow id="SequenceFlow_3" sourceRef="ExclusiveGateway_1" targetRef="Task_2" />
+    <ns0:task id="Task_2" name="Supplier Selection">
+      <ns0:incoming>SequenceFlow_3</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_5</ns0:outgoing>
+    </ns0:task>
+    <ns0:sequenceFlow id="SequenceFlow_5" sourceRef="Task_2" targetRef="Task_3" />
+    <ns0:task id="Task_3" name="Purchase Order Creation">
+      <ns0:incoming>SequenceFlow_5</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_6</ns0:outgoing>
+    </ns0:task>
+    <ns0:sequenceFlow id="SequenceFlow_6" sourceRef="Task_3" targetRef="Task_5" />
+    <ns0:task id="Task_5" name="Receiving and Quality Check">
+      <ns0:incoming>SequenceFlow_6</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_7</ns0:outgoing>
+    </ns0:task>
+    <ns0:endEvent id="EndEvent_1" name="Inventory Update and Completion">
+      <ns0:incoming>SequenceFlow_7</ns0:incoming>
+      <ns0:incoming>SequenceFlow_4</ns0:incoming>
+    </ns0:endEvent>
+    <ns0:sequenceFlow id="SequenceFlow_7" sourceRef="Task_5" targetRef="EndEvent_1" />
+    <ns0:sequenceFlow id="SequenceFlow_4" sourceRef="ExclusiveGateway_1" targetRef="EndEvent_1" />
+  </ns0:process>
+
+  <ns1:BPMNDiagram id="BPMNDiagram_1">
+    <ns1:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <ns1:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <ns2:Bounds x="100" y="100" width="36" height="36" />
+      </ns1:BPMNShape>
+      <ns1:BPMNShape id="Activity_1_di" bpmnElement="Activity_1">
+        <ns2:Bounds x="200" y="100" width="100" height="80" />
+      </ns1:BPMNShape>
+      
+      
+      <ns1:BPMNShape id="ExclusiveGateway_1_di" bpmnElement="ExclusiveGateway_1">
+        <ns2:Bounds x="350" y="110" width="50" height="50" />
+      </ns1:BPMNShape>
+      
+      
+      <ns1:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <ns3:waypoint x="136" y="118" />
+        <ns3:waypoint x="200" y="118" />
+      </ns1:BPMNEdge>
+      
+      
+      <ns1:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <ns3:waypoint x="300" y="118" />
+        <ns3:waypoint x="350" y="118" />
+      </ns1:BPMNEdge>
+      
+      <ns1:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <ns2:Bounds x="400" y="100" width="36" height="36" />
+      </ns1:BPMNShape>
+    </ns1:BPMNPlane>
+  </ns1:BPMNDiagram>
+</ns0:definitions><ns0:process xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Process_1" isExecutable="false">
+    <ns0:startEvent id="StartEvent_1" name="Inventory Monitoring">
+      <ns0:outgoing>Flow_1</ns0:outgoing>
+    </ns0:startEvent>
+    
+    <ns0:task id="Activity_1" name="Demand Forecasting">
+      <ns0:incoming>Flow_1</ns0:incoming>
+      <ns0:outgoing>Flow_2</ns0:outgoing>
+    </ns0:task>
+    
+    <ns0:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_1" />
+    <ns0:sequenceFlow id="Flow_2" sourceRef="Activity_1" targetRef="ExclusiveGateway_1" />
+    
+    
+    <ns0:exclusiveGateway id="ExclusiveGateway_1" name="Demand Increase?">
+      <ns0:incoming>Flow_2</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_3</ns0:outgoing>
+      <ns0:outgoing>SequenceFlow_4</ns0:outgoing>
+    </ns0:exclusiveGateway>
+    
+    <ns0:sequenceFlow id="SequenceFlow_3" sourceRef="ExclusiveGateway_1" targetRef="Task_2" />
+    <ns0:task id="Task_2" name="Supplier Selection">
+      <ns0:incoming>SequenceFlow_3</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_5</ns0:outgoing>
+    </ns0:task>
+    <ns0:sequenceFlow id="SequenceFlow_5" sourceRef="Task_2" targetRef="Task_3" />
+    <ns0:task id="Task_3" name="Purchase Order Creation">
+      <ns0:incoming>SequenceFlow_5</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_6</ns0:outgoing>
+    </ns0:task>
+    <ns0:sequenceFlow id="SequenceFlow_6" sourceRef="Task_3" targetRef="Task_5" />
+    <ns0:task id="Task_5" name="Receiving and Quality Check">
+      <ns0:incoming>SequenceFlow_6</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_7</ns0:outgoing>
+    </ns0:task>
+    <ns0:endEvent id="EndEvent_1" name="Inventory Update and Completion">
+      <ns0:incoming>SequenceFlow_7</ns0:incoming>
+      <ns0:incoming>SequenceFlow_4</ns0:incoming>
+    </ns0:endEvent>
+    <ns0:sequenceFlow id="SequenceFlow_7" sourceRef="Task_5" targetRef="EndEvent_1" />
+    <ns0:sequenceFlow id="SequenceFlow_4" sourceRef="ExclusiveGateway_1" targetRef="EndEvent_1" />
+  </ns0:process>
+
+  <!-- Start Event: Inventory Monitoring --><ns0:startEvent xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="StartEvent_1" name="Inventory Monitoring">
+      <ns0:outgoing>Flow_1</ns0:outgoing>
+    </ns0:startEvent>
+    
+    <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_1</ns0:outgoing>
+    <!-- Task: Demand Forecasting --><ns0:task xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Activity_1" name="Demand Forecasting">
+      <ns0:incoming>Flow_1</ns0:incoming>
+      <ns0:outgoing>Flow_2</ns0:outgoing>
+    </ns0:task>
+    
+    <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_1</ns0:incoming>
+      <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_2</ns0:outgoing>
+    <!-- Sequence Flow: Flow_1 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Flow_1" sourceRef="StartEvent_1" targetRef="Activity_1" />
+    <!-- Sequence Flow: Flow_2 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Flow_2" sourceRef="Activity_1" targetRef="ExclusiveGateway_1" />
+    
+    
+    <!-- Exclusive Gateway: Demand Increase? --><ns0:exclusiveGateway xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="ExclusiveGateway_1" name="Demand Increase?">
+      <ns0:incoming>Flow_2</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_3</ns0:outgoing>
+      <ns0:outgoing>SequenceFlow_4</ns0:outgoing>
+    </ns0:exclusiveGateway>
+    
+    <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">Flow_2</ns0:incoming>
+      <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_3</ns0:outgoing>
+      <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_4</ns0:outgoing>
+    <!-- Sequence Flow: SequenceFlow_3 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="SequenceFlow_3" sourceRef="ExclusiveGateway_1" targetRef="Task_2" />
+    <!-- Task: Supplier Selection --><ns0:task xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Task_2" name="Supplier Selection">
+      <ns0:incoming>SequenceFlow_3</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_5</ns0:outgoing>
+    </ns0:task>
+    <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_3</ns0:incoming>
+      <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_5</ns0:outgoing>
+    <!-- Sequence Flow: SequenceFlow_5 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="SequenceFlow_5" sourceRef="Task_2" targetRef="Task_3" />
+    <!-- Task: Purchase Order Creation --><ns0:task xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Task_3" name="Purchase Order Creation">
+      <ns0:incoming>SequenceFlow_5</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_6</ns0:outgoing>
+    </ns0:task>
+    <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_5</ns0:incoming>
+      <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_6</ns0:outgoing>
+    <!-- Sequence Flow: SequenceFlow_6 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="SequenceFlow_6" sourceRef="Task_3" targetRef="Task_5" />
+    <!-- Task: Receiving and Quality Check --><ns0:task xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="Task_5" name="Receiving and Quality Check">
+      <ns0:incoming>SequenceFlow_6</ns0:incoming>
+      <ns0:outgoing>SequenceFlow_7</ns0:outgoing>
+    </ns0:task>
+    <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_6</ns0:incoming>
+      <ns0:outgoing xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_7</ns0:outgoing>
+    <!-- End Event: Inventory Update and Completion --><ns0:endEvent xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="EndEvent_1" name="Inventory Update and Completion">
+      <ns0:incoming>SequenceFlow_7</ns0:incoming>
+      <ns0:incoming>SequenceFlow_4</ns0:incoming>
+    </ns0:endEvent>
+    <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_7</ns0:incoming>
+      <ns0:incoming xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL">SequenceFlow_4</ns0:incoming>
+    <!-- Sequence Flow: SequenceFlow_7 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="SequenceFlow_7" sourceRef="Task_5" targetRef="EndEvent_1" />
+    <!-- Sequence Flow: SequenceFlow_4 --><ns0:sequenceFlow xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/MODEL" id="SequenceFlow_4" sourceRef="ExclusiveGateway_1" targetRef="EndEvent_1" />
+  <ns0:BPMNDiagram xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns2="http://www.omg.org/spec/DD/20100524/DI" id="BPMNDiagram_1">
+    <ns0:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <ns0:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <ns1:Bounds x="100" y="100" width="36" height="36" />
+      </ns0:BPMNShape>
+      <ns0:BPMNShape id="Activity_1_di" bpmnElement="Activity_1">
+        <ns1:Bounds x="200" y="100" width="100" height="80" />
+      </ns0:BPMNShape>
+      
+      
+      <ns0:BPMNShape id="ExclusiveGateway_1_di" bpmnElement="ExclusiveGateway_1">
+        <ns1:Bounds x="350" y="110" width="50" height="50" />
+      </ns0:BPMNShape>
+      
+      
+      <ns0:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <ns2:waypoint x="136" y="118" />
+        <ns2:waypoint x="200" y="118" />
+      </ns0:BPMNEdge>
+      
+      
+      <ns0:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <ns2:waypoint x="300" y="118" />
+        <ns2:waypoint x="350" y="118" />
+      </ns0:BPMNEdge>
+      
+      <ns0:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <ns1:Bounds x="400" y="100" width="36" height="36" />
+      </ns0:BPMNShape>
+    </ns0:BPMNPlane>
+  </ns0:BPMNDiagram>
+<ns0:BPMNPlane xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns2="http://www.omg.org/spec/DD/20100524/DI" id="BPMNPlane_1" bpmnElement="Process_1">
+      <ns0:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <ns1:Bounds x="100" y="100" width="36" height="36" />
+      </ns0:BPMNShape>
+      <ns0:BPMNShape id="Activity_1_di" bpmnElement="Activity_1">
+        <ns1:Bounds x="200" y="100" width="100" height="80" />
+      </ns0:BPMNShape>
+      
+      
+      <ns0:BPMNShape id="ExclusiveGateway_1_di" bpmnElement="ExclusiveGateway_1">
+        <ns1:Bounds x="350" y="110" width="50" height="50" />
+      </ns0:BPMNShape>
+      
+      
+      <ns0:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <ns2:waypoint x="136" y="118" />
+        <ns2:waypoint x="200" y="118" />
+      </ns0:BPMNEdge>
+      
+      
+      <ns0:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <ns2:waypoint x="300" y="118" />
+        <ns2:waypoint x="350" y="118" />
+      </ns0:BPMNEdge>
+      
+      <ns0:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <ns1:Bounds x="400" y="100" width="36" height="36" />
+      </ns0:BPMNShape>
+    </ns0:BPMNPlane>
+  <ns0:BPMNShape xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DC" id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <ns1:Bounds x="100" y="100" width="36" height="36" />
+      </ns0:BPMNShape>
+      <ns0:Bounds xmlns:ns0="http://www.omg.org/spec/DD/20100524/DC" x="100" y="100" width="36" height="36" />
+      <ns0:BPMNShape xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DC" id="Activity_1_di" bpmnElement="Activity_1">
+        <ns1:Bounds x="200" y="100" width="100" height="80" />
+      </ns0:BPMNShape>
+      
+      
+      <ns0:Bounds xmlns:ns0="http://www.omg.org/spec/DD/20100524/DC" x="200" y="100" width="100" height="80" />
+      <ns0:BPMNShape xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DC" id="ExclusiveGateway_1_di" bpmnElement="ExclusiveGateway_1">
+        <ns1:Bounds x="350" y="110" width="50" height="50" />
+      </ns0:BPMNShape>
+      
+      
+      <ns0:Bounds xmlns:ns0="http://www.omg.org/spec/DD/20100524/DC" x="350" y="110" width="50" height="50" />
+      <ns0:BPMNEdge xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DI" id="Flow_1_di" bpmnElement="Flow_1">
+        <ns1:waypoint x="136" y="118" />
+        <ns1:waypoint x="200" y="118" />
+      </ns0:BPMNEdge>
+      
+      
+      <ns0:waypoint xmlns:ns0="http://www.omg.org/spec/DD/20100524/DI" x="136" y="118" />
+        <ns0:waypoint xmlns:ns0="http://www.omg.org/spec/DD/20100524/DI" x="200" y="118" />
+      <ns0:BPMNEdge xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DI" id="Flow_2_di" bpmnElement="Flow_2">
+        <ns1:waypoint x="300" y="118" />
+        <ns1:waypoint x="350" y="118" />
+      </ns0:BPMNEdge>
+      
+      <ns0:waypoint xmlns:ns0="http://www.omg.org/spec/DD/20100524/DI" x="300" y="118" />
+        <ns0:waypoint xmlns:ns0="http://www.omg.org/spec/DD/20100524/DI" x="350" y="118" />
+      <ns0:BPMNShape xmlns:ns0="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns1="http://www.omg.org/spec/DD/20100524/DC" id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <ns1:Bounds x="400" y="100" width="36" height="36" />
+      </ns0:BPMNShape>
+    <ns0:Bounds xmlns:ns0="http://www.omg.org/spec/DD/20100524/DC" x="400" y="100" width="36" height="36" />
+      

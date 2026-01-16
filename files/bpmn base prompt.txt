@@ -1,0 +1,64 @@
+Here are the instructions for a .bpmn:
+Project Management Process BPMN Exercise
+Please model the following process:
+The process includes project initiation, planning, execution, monitoring, and closure. It covers tasks like gathering requirements, assigning tasks, tracking progress, and project handover.
+
+Process Steps:
+
+Project Initiation
+Step Details: A project manager initiates the process by defining a project goal and assembling a project team. This step triggers either a client kickoff meeting or an internal strategy session.
+Requirements Gathering
+Step Details: The project team collects requirements from stakeholders. If requirements are unclear, a feedback loop is created to clarify them until all requirements are agreed upon.
+Project Planning
+Step Details: The project manager and team develop a detailed project plan, including a timeline, resource allocation, and risk analysis. Approval from the project sponsor is required before moving forward.
+Task Assignment and Execution
+Step Details: The project manager assigns tasks to the team based on the project plan. Team members start working on their respective tasks. If any task is delayed, an escalation step is followed to manage delays.
+Project Monitoring and Reporting
+Step Details: Regular check-ins and status updates are performed to monitor the project's progress. A project report is created to track key milestones and resource use.
+If project milestones are not met, adjustments are made to the plan.
+Project Handover and Closure
+Step Details: Once the project is completed, a final review is conducted. The project is handed over to the client or relevant department. The project manager officially closes the project and generates a "Project Closure Report."
+
+Now generate the full and complete xml for the .bpmn file corresponding to those instructions. Make sure each task or activity is not overlapping another activity/task and there is a little space in between them all for readability. Make sure that each line only moves horizontally and/or vertically, not horizontally [so line should only change the x or y value at a time, then if it needs to reach somewhere it'll change the other variable]. Even if it's long just keep going. Here is an example .bpmn file to show you how it's formatted:
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.org/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="17.7.1" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="StartEvent_1" name="Start">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <task id="Task_1" name="Perform Task">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_2</outgoing>
+    </task>
+    <endEvent id="EndEvent_1" name="End">
+      <incoming>Flow_2</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="Task_1" />
+    <sequenceFlow id="Flow_2" sourceRef="Task_1" targetRef="EndEvent_1" />
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="StartEvent_1">
+        <dc:Bounds x="173" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_1" bpmnElement="Task_1">
+        <dc:Bounds x="236" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="EndEvent_1">
+        <dc:Bounds x="383" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="391" y="228" width="20" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_1" bpmnElement="Flow_1">
+        <di:waypoint x="209" y="120" />
+        <di:waypoint x="236" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_Flow_2" bpmnElement="Flow_2">
+        <di:waypoint x="336" y="120" />
+        <di:waypoint x="400" y="120" />
+        <di:waypoint x="400" y="190" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

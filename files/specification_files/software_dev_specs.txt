@@ -1,0 +1,104 @@
+Overview:
+The Software Development Lifecycle (SDLC) process modeled in this BPMN represents the typical phases of software development, starting from requirements analysis to project closure. It includes feedback loops, decision gateways, and escalations to handle issues at various stages.
+Process Details:
+1.	Start Event:
+o	Element ID: StartEvent_1
+o	Name: Start
+o	Description: The process begins with the initiation of the software development project.
+o	Outgoing Flow: Flow_1
+2.	Requirements Analysis:
+o	Element ID: Task_RequirementsAnalysis
+o	Name: Requirements Analysis
+o	Description: A business analyst gathers user stories and requirements from stakeholders.
+o	Outgoing Flow: Flow_181xx95
+3.	Requirements Clarification Decision:
+o	Element ID: Gateway_RequirementsClear
+o	Name: Requirements Clear?
+o	Type: Exclusive Gateway
+o	Description: A decision point to check if the requirements are clear.
+o	Outgoing Flows:
+	Yes (Clear): Moves to System Design (Flow_3)
+	No (Unclear): Moves to Clarify Requirements (Flow_4)
+4.	Clarify Requirements (if required):
+o	Element ID: Task_ClarifyRequirements
+o	Name: Clarify Requirements
+o	Description: Feedback loop to clarify unclear requirements with stakeholders.
+o	Outgoing Flow: Returns to Requirements Analysis (Flow_5)
+5.	System Design:
+o	Element ID: Task_SystemDesign
+o	Name: System Design
+o	Description: System architects develop a detailed system architecture and design.
+o	Outgoing Flow: Moves to Technical Lead Approval (Flow_6)
+6.	Technical Lead Approval:
+o	Element ID: Task_Approval
+o	Name: Technical Lead Approval
+o	Description: The system design is reviewed and approved by the technical lead.
+o	Outgoing Flow: Moves to Implementation (Flow_7)
+7.	Implementation:
+o	Element ID: Task_Implementation
+o	Name: Implementation
+o	Description: The development team writes the code based on the approved design.
+o	Outgoing Flow: Proceeds to coding delay check (Flow_8)
+8.	Coding Delay Decision:
+o	Element ID: Gateway_CodingDelayed
+o	Name: Coding Delayed?
+o	Type: Exclusive Gateway
+o	Description: A decision point to check if there are any coding delays.
+o	Outgoing Flows:
+	No (On Time): Moves to Testing (Flow_9)
+	Yes (Delayed): Moves to Manage Delays (Flow_10)
+9.	Manage Delays (if coding is delayed):
+o	Element ID: Task_Escalation
+o	Name: Manage Delays
+o	Description: Escalation process to handle coding delays.
+o	Outgoing Flow: Returns to Coding Delay Decision (Flow_11)
+10.	Testing:
+o	Element ID: Task_Testing
+o	Name: Testing
+o	Description: The QA team performs unit, integration, system, and user acceptance testing.
+o	Outgoing Flow: Proceeds to Defects Found decision (Flow_12)
+11.	Defects Found Decision:
+o	Element ID: Gateway_DefectsFound
+o	Name: Defects Found?
+o	Type: Exclusive Gateway
+o	Description: A decision point to check if defects were found during testing.
+o	Outgoing Flows:
+	No (No Defects): Moves to Deployment (Flow_13)
+	Yes (Defects): Moves to Fix Defects (Flow_14)
+12.	Fix Defects (if defects are found):
+o	Element ID: Task_FixDefects
+o	Name: Fix Defects
+o	Description: The development team fixes any defects found during testing.
+o	Outgoing Flow: Returns to Defects Found decision (Flow_15)
+13.	Deployment:
+o	Element ID: Task_Deployment
+o	Name: Deployment
+o	Description: Once approved, the software is deployed to the production environment.
+o	Outgoing Flow: Proceeds to Maintenance (Flow_16)
+14.	Maintenance:
+o	Element ID: Task_Maintenance
+o	Name: Maintenance
+o	Description: Post-deployment monitoring and ongoing maintenance to ensure software stability.
+o	Outgoing Flow: Proceeds to Critical Issues decision (Flow_17)
+15.	Critical Issues Decision:
+o	Element ID: Gateway_CriticalIssues
+o	Name: Critical Issues?
+o	Type: Exclusive Gateway
+o	Description: A decision point to check if any critical issues are found during maintenance.
+o	Outgoing Flows:
+	No (No Issues): Moves to Final Review (Flow_18)
+	Yes (Issues): Moves to Develop Hotfix/Patch (Flow_19)
+16.	Develop Hotfix/Patch (if critical issues are found):
+o	Element ID: Task_Hotfix
+o	Name: Develop Hotfix/Patch
+o	Description: Development of a hotfix or patch for critical issues found during maintenance.
+o	Outgoing Flow: Returns to Maintenance (Flow_20)
+17.	Final Review and Closure:
+o	Element ID: Task_FinalReview
+o	Name: Final Review and Closure
+o	Description: Final review of the software post-maintenance. If all major issues are resolved, the project is officially closed.
+o	Outgoing Flow: Moves to End (Flow_21)
+18.	End Event:
+o	Element ID: EndEvent_1
+o	Name: End
+o	Description: Marks the official closure of the project.
